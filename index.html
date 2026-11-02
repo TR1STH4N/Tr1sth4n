@@ -1,0 +1,1647 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b10">
+<link rel="icon" type="image/png" href="assets/Logo.png">
+<link rel="apple-touch-icon" href="assets/Logo.png">
+
+<title>Tr1sth4n</title>
+<meta name="description" content="Tr1sth4n — Video editor, photographer, videographer and Minecraft server developer.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#0b0b10;
+  --surface:#111118;
+  --surface2:#171720;
+  --text:#f4f2f8;
+  --muted:#96939f;
+  --line:#292833;
+  --purple:#9b72ff;
+  --purple2:#7046df;
+  --lime:#c5ff6b;
+  --font:"Manrope",sans-serif;
+  --display:"Space Grotesk",sans-serif;
+  --mono:"DM Mono",monospace;
+  --serif:"Instrument Serif",serif;
+}
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:90px;
+  overflow-x:hidden;
+}
+
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+button {
+  font:inherit;
+}
+
+::selection {
+  background:var(--purple);
+  color:white;
+}
+
+.container {
+  width:min(1200px, calc(100% - 80px));
+  margin:auto;
+}
+
+.mono {
+  font-family:var(--mono);
+}
+
+.serif {
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+}
+
+.accent {
+  color:var(--purple);
+}
+
+.lime {
+  color:var(--lime);
+}
+
+/* BACKGROUND */
+
+.background-glow {
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  overflow:hidden;
+}
+
+.glow {
+  position:absolute;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  filter:blur(150px);
+  opacity:.12;
+}
+
+.glow.one {
+  background:var(--purple);
+  top:-250px;
+  right:-100px;
+}
+
+.glow.two {
+  background:#4035b9;
+  bottom:5%;
+  left:-350px;
+}
+
+/* NAVIGATION */
+
+.nav {
+  position:fixed;
+  z-index:100;
+  top:0;
+  left:0;
+  width:100%;
+  padding:20px 0;
+  background:rgba(11,11,16,.8);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.nav-inner {
+  width:min(1200px,calc(100% - 80px));
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo {
+  font-family:var(--display);
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:-1.5px;
+}
+
+.logo span {
+  color:var(--purple);
+}
+
+.nav-links {
+  display:flex;
+  align-items:center;
+  gap:34px;
+}
+
+.nav-links a {
+  color:var(--muted);
+  font-size:13px;
+  transition:.25s;
+}
+
+.nav-links a:hover {
+  color:white;
+}
+
+.nav-contact {
+  border:1px solid var(--line);
+  padding:10px 19px;
+  border-radius:5px;
+  color:white!important;
+}
+
+.nav-contact:hover {
+  background:var(--purple);
+  border-color:var(--purple);
+}
+
+.menu-toggle {
+  display:none;
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:white;
+  width:42px;
+  height:42px;
+  border-radius:5px;
+  font-size:21px;
+  cursor:pointer;
+}
+
+/* HERO */
+
+.hero {
+  min-height:850px;
+  padding:190px 0 100px;
+  display:flex;
+  align-items:center;
+  position:relative;
+}
+
+.hero-content {
+  width:min(1200px, calc(100% - 80px));
+  margin-inline:auto;
+}
+
+.availability {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:var(--muted);
+  font:12px var(--mono);
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:10px 16px;
+  margin-bottom:45px;
+}
+
+.status-dot {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--lime);
+  box-shadow:0 0 12px var(--lime);
+}
+
+.hero-label {
+  font:12px var(--mono);
+  letter-spacing:3px;
+  color:var(--purple);
+  margin-bottom:20px;
+  text-transform:uppercase;
+}
+
+.hero h1 {
+  font-family:var(--display);
+  font-size:clamp(65px,10vw,132px);
+  font-weight:700;
+  line-height:.94;
+  letter-spacing:-.09em;
+  max-width:1100px;
+}
+
+.hero h1 .second-line {
+  display:block;
+  color:var(--muted);
+}
+
+.hero h1 .serif {
+  color:var(--purple);
+  letter-spacing:-.04em;
+  font-weight:400;
+}
+
+.hero-bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:40px;
+  margin-top:55px;
+}
+
+.hero-description {
+  max-width:510px;
+  font-size:17px;
+  color:var(--muted);
+  line-height:1.9;
+}
+
+.hero-description strong {
+  color:white;
+  font-weight:600;
+}
+
+.hero-actions {
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:15px 24px;
+  border:1px solid var(--line);
+  border-radius:5px;
+  font-size:13px;
+  font-weight:700;
+  transition:.25s;
+}
+
+.btn-primary {
+  background:var(--purple);
+  border-color:var(--purple);
+  color:white;
+}
+
+.btn-primary:hover {
+  background:var(--purple2);
+  transform:translateY(-3px);
+}
+
+.btn-outline:hover {
+  border-color:var(--purple);
+  color:var(--purple);
+  transform:translateY(-3px);
+}
+
+.hero-index {
+  position:absolute;
+  right:5%;
+  top:45%;
+  transform:rotate(90deg);
+  color:#45434e;
+  font:11px var(--mono);
+  letter-spacing:4px;
+}
+
+/* GENERAL SECTION */
+
+section.content-section {
+  padding:125px 0;
+}
+
+.section-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:30px;
+  margin-bottom:65px;
+}
+
+.section-label {
+  color:var(--purple);
+  font:12px var(--mono);
+  letter-spacing:2px;
+  margin-bottom:15px;
+  text-transform:uppercase;
+}
+
+.section-title {
+  font-family:var(--display);
+  font-size:clamp(40px,6vw,75px);
+  font-weight:700;
+  letter-spacing:-.07em;
+  line-height:1.05;
+}
+
+.section-number {
+  font:12px var(--mono);
+  color:var(--muted);
+  padding-bottom:8px;
+}
+
+/* ABOUT */
+
+.about-grid {
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:100px;
+  align-items:start;
+}
+
+.about-text {
+  font-size:clamp(20px,3vw,30px);
+  font-weight:500;
+  letter-spacing:-1px;
+  line-height:1.65;
+}
+
+.about-text span {
+  color:var(--purple);
+}
+
+.about-sub {
+  color:var(--muted);
+  margin-top:25px;
+  font-size:15px;
+  line-height:1.9;
+  max-width:620px;
+}
+
+.about-stats {
+  border-top:1px solid var(--line);
+}
+
+.stat {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:23px 0;
+  border-bottom:1px solid var(--line);
+  gap:15px;
+}
+
+.stat span {
+  color:var(--muted);
+  font-size:13px;
+}
+
+.stat strong {
+  font-family:var(--display);
+  font-size:28px;
+  font-weight:600;
+}
+
+/* EXPERTISE */
+
+.expertise {
+  background:var(--surface);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.expertise-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+}
+
+.expertise-card {
+  position:relative;
+  background:var(--bg);
+  border:1px solid var(--line);
+  padding:38px;
+  min-height:260px;
+  transition:.3s;
+  overflow:hidden;
+}
+
+.expertise-card:hover {
+  border-color:var(--purple);
+  transform:translateY(-5px);
+}
+
+.card-index {
+  font:11px var(--mono);
+  color:var(--purple);
+}
+
+.card-icon {
+  font-size:30px;
+  margin:25px 0 15px;
+}
+
+.expertise-card h3 {
+  font-family:var(--display);
+  font-size:25px;
+  letter-spacing:-1px;
+  margin-bottom:10px;
+}
+
+.expertise-card p {
+  color:var(--muted);
+  font-size:14px;
+  max-width:390px;
+  line-height:1.8;
+}
+
+.card-arrow {
+  position:absolute;
+  right:35px;
+  top:32px;
+  color:var(--muted);
+  font-size:20px;
+}
+
+/* CREATIVE WORK */
+
+.work-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:25px;
+}
+
+.work-card {
+  border:1px solid var(--line);
+  background:var(--surface);
+  overflow:hidden;
+  transition:.3s;
+}
+
+.work-card:hover {
+  transform:translateY(-6px);
+  border-color:var(--purple);
+}
+
+.work-visual {
+  height:290px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 50% 50%,#30204e 0%,#17121f 45%,#101017 100%);
+}
+
+.work-visual.film {
+  background:
+    radial-gradient(circle at 50% 50%,#3a2736 0%,#1c151c 45%,#101017 100%);
+}
+
+.work-visual .visual-text {
+  font-family:var(--display);
+  font-size:clamp(40px,6vw,75px);
+  font-weight:700;
+  letter-spacing:-5px;
+  opacity:.9;
+  text-align:center;
+  transition:.4s;
+}
+
+.work-card:hover .visual-text {
+  transform:scale(1.08);
+}
+
+.visual-label {
+  position:absolute;
+  left:20px;
+  top:20px;
+  font:11px var(--mono);
+  color:white;
+  background:rgba(0,0,0,.35);
+  padding:8px 12px;
+  border:1px solid rgba(255,255,255,.2);
+}
+
+.work-info {
+  padding:28px;
+}
+
+.work-info h3 {
+  font-family:var(--display);
+  font-size:27px;
+  letter-spacing:-1px;
+  margin-bottom:10px;
+}
+
+.work-info p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+}
+
+.work-tags {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.work-tags span {
+  border:1px solid var(--line);
+  padding:6px 11px;
+  border-radius:3px;
+  color:var(--muted);
+  font:10px var(--mono);
+}
+
+/* SERVER DEVELOPMENT */
+
+.server-section {
+  background:var(--surface);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.server-intro {
+  max-width:650px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.9;
+  margin-top:20px;
+}
+
+.server-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  margin-top:55px;
+}
+
+.server-card {
+  position:relative;
+  background:var(--bg);
+  border:1px solid var(--line);
+  padding:38px;
+  overflow:hidden;
+  min-height:350px;
+  transition:.3s;
+}
+
+.server-card:hover {
+  border-color:var(--purple);
+  transform:translateY(-5px);
+}
+
+.server-card.featured {
+  border-color:rgba(197,255,107,.35);
+}
+
+.server-card.featured:hover {
+  border-color:var(--lime);
+}
+
+.server-type {
+  font:11px var(--mono);
+  letter-spacing:2px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
+.server-card h3 {
+  font-family:var(--display);
+  font-size:clamp(32px,5vw,48px);
+  letter-spacing:-3px;
+  margin-top:40px;
+  margin-bottom:15px;
+}
+
+.server-card p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.9;
+  max-width:430px;
+}
+
+.server-bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:20px;
+  margin-top:45px;
+  border-top:1px solid var(--line);
+  padding-top:22px;
+}
+
+.server-status {
+  color:var(--muted);
+  font:11px var(--mono);
+}
+
+.server-achievement {
+  text-align:right;
+}
+
+.server-achievement strong {
+  display:block;
+  color:var(--lime);
+  font-family:var(--display);
+  font-size:45px;
+  line-height:1;
+}
+
+.server-achievement span {
+  color:var(--muted);
+  font:10px var(--mono);
+}
+
+.server-decoration {
+  position:absolute;
+  right:-30px;
+  top:40px;
+  font-size:150px;
+  opacity:.035;
+  pointer-events:none;
+  font-family:var(--display);
+  font-weight:800;
+}
+
+/* SERVER SKILLS */
+
+.server-skills {
+  margin-top:65px;
+}
+
+.server-skills h3 {
+  font:12px var(--mono);
+  color:var(--muted);
+  letter-spacing:2px;
+  margin-bottom:22px;
+  text-transform:uppercase;
+}
+
+.server-skill-list {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.server-skill-list span {
+  border:1px solid var(--line);
+  background:var(--bg);
+  padding:12px 17px;
+  font-size:13px;
+  color:var(--text);
+}
+
+/* EXPERIENCE */
+
+.timeline {
+  border-left:1px solid var(--line);
+  margin-left:10px;
+}
+
+.timeline-item {
+  position:relative;
+  padding:0 0 55px 45px;
+}
+
+.timeline-item:last-child {
+  padding-bottom:0;
+}
+
+.timeline-item::before {
+  content:"";
+  position:absolute;
+  left:-6px;
+  top:8px;
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:var(--purple);
+  box-shadow:0 0 15px rgba(155,114,255,.5);
+}
+
+.timeline-item .year {
+  font:11px var(--mono);
+  color:var(--purple);
+  margin-bottom:12px;
+}
+
+.timeline-item h3 {
+  font-family:var(--display);
+  font-size:25px;
+  margin-bottom:8px;
+}
+
+.timeline-item p {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+  max-width:650px;
+}
+
+/* CONTACT */
+
+.contact {
+  background:var(--purple);
+  color:white;
+  padding:100px 0;
+  position:relative;
+  overflow:hidden;
+}
+
+.contact-content {
+  position:relative;
+  z-index:1;
+}
+
+.contact .section-label {
+  color:rgba(255,255,255,.7);
+}
+
+.contact h2 {
+  font-family:var(--display);
+  font-size:clamp(50px,9vw,110px);
+  letter-spacing:-.08em;
+  line-height:.95;
+  max-width:900px;
+}
+
+.contact-description {
+  margin-top:25px;
+  color:rgba(255,255,255,.75);
+  font-size:15px;
+}
+
+.contact .btn {
+  margin-top:35px;
+  background:white;
+  color:#1b122a;
+  border-color:white;
+}
+
+.contact .btn:hover {
+  background:var(--lime);
+  border-color:var(--lime);
+}
+
+.contact-bg {
+  position:absolute;
+  right:-30px;
+  bottom:-100px;
+  font-family:var(--display);
+  font-size:clamp(150px,30vw,380px);
+  font-weight:800;
+  letter-spacing:-.1em;
+  color:white;
+  opacity:.07;
+  pointer-events:none;
+}
+
+/* FOOTER */
+
+footer {
+  padding:45px 0;
+  background:#08080c;
+}
+
+.footer-inner {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:25px;
+  flex-wrap:wrap;
+}
+
+.footer-logo {
+  font-family:var(--display);
+  font-size:22px;
+  font-weight:700;
+}
+
+.footer-logo span {color:var(--purple)}
+
+.footer-copy {
+  font:11px var(--mono);
+  color:var(--muted);
+}
+
+.footer-socials {
+  display:flex;
+  gap:22px;
+}
+
+.footer-socials a {
+  font-size:12px;
+  color:var(--muted);
+  transition:.2s;
+}
+
+.footer-socials a:hover {color:var(--purple)}
+
+/* SCROLL REVEAL ANIMATION */
+
+.reveal {
+  opacity:0;
+  transform:translate3d(0, 38px, 0) scale(.985);
+  filter:blur(5px);
+  transition:
+    opacity .8s cubic-bezier(.2,.7,.2,1),
+    transform .8s cubic-bezier(.2,.7,.2,1),
+    filter .8s cubic-bezier(.2,.7,.2,1);
+  will-change:opacity, transform, filter;
+}
+
+.reveal.visible {
+  opacity:1;
+  transform:translate3d(0, 0, 0) scale(1);
+  filter:blur(0);
+}
+
+/* Slight stagger makes groups appear in sequence */
+.expertise-grid .reveal:nth-child(2),
+.work-grid .reveal:nth-child(2),
+.server-grid .reveal:nth-child(2),
+.timeline .reveal:nth-child(2) { transition-delay:.10s; }
+
+.expertise-grid .reveal:nth-child(3),
+.work-grid .reveal:nth-child(3),
+.timeline .reveal:nth-child(3) { transition-delay:.18s; }
+
+.expertise-grid .reveal:nth-child(4),
+.work-grid .reveal:nth-child(4),
+.timeline .reveal:nth-child(4) { transition-delay:.26s; }
+
+.expertise-grid .reveal:nth-child(5) { transition-delay:.34s; }
+
+@media(prefers-reduced-motion:reduce) {
+  .reveal,
+  .reveal.visible {
+    opacity:1;
+    transform:none;
+    filter:none;
+    transition:none;
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px) {
+  .hero {
+    min-height:750px;
+  }
+
+  .hero-index {display:none}
+
+  .about-grid {
+    grid-template-columns:1fr .8fr;
+    gap:45px;
+  }
+
+  .expertise-card {padding:28px}
+
+  .work-visual {height:240px}
+}
+
+@media(max-width:750px) {
+  .container {
+    width:calc(100% - 44px);
+  }
+
+  .nav-inner {
+    width:calc(100% - 44px);
+  }
+
+  .menu-toggle {
+    display:block;
+  }
+
+  .nav-links {
+    display:none;
+    position:absolute;
+    top:75px;
+    left:0;
+    width:100%;
+    padding:25px 22px 30px;
+    background:#111118;
+    border-bottom:1px solid var(--line);
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+  }
+
+  .nav-links.open {display:flex}
+
+  .nav-links a {
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .nav-links .nav-contact {
+    text-align:center;
+    margin-top:15px;
+    border:1px solid var(--line);
+  }
+
+  .hero {
+    min-height:auto;
+    padding:155px 0 100px;
+  }
+
+  .availability {margin-bottom:35px}
+
+  .hero h1 {
+    font-size:clamp(60px,12vw,95px);
+  }
+
+  .hero-bottom {
+    flex-direction:column;
+    align-items:flex-start;
+    gap:30px;
+    margin-top:40px;
+  }
+
+  .hero-description {
+    font-size:15px;
+  }
+
+  section.content-section {padding:85px 0}
+
+  .section-top {
+    margin-bottom:40px;
+  }
+
+  .about-grid {
+    grid-template-columns:1fr;
+    gap:45px;
+  }
+
+  .expertise-grid,
+  .work-grid,
+  .server-grid {
+    grid-template-columns:1fr;
+  }
+
+  .expertise-card {min-height:230px}
+
+  .work-visual {height:270px}
+
+  .server-card {min-height:320px}
+
+  .contact {padding:80px 0}
+}
+
+@media(max-width:480px) {
+  .container,
+  .nav-inner {
+    width:calc(100% - 36px);
+  }
+
+  .hero {
+    padding-top:135px;
+    padding-bottom:75px;
+  }
+
+  .hero h1 {
+    font-size:clamp(53px,13vw,72px);
+    letter-spacing:-.08em;
+  }
+
+  .hero-description {font-size:14px}
+
+  .hero-actions {width:100%}
+
+  .hero-actions .btn {
+    flex:1;
+    padding:14px 12px;
+    font-size:11px;
+  }
+
+  .section-title {
+    font-size:clamp(38px,10vw,52px);
+  }
+
+  section.content-section {padding:70px 0}
+
+  .about-text {font-size:21px}
+
+  .expertise-card {
+    padding:25px;
+    min-height:220px;
+  }
+
+  .expertise-card h3 {font-size:22px}
+
+  .work-visual {height:220px}
+
+  .work-info {padding:22px}
+
+  .work-info h3 {font-size:23px}
+
+  .server-card {
+    padding:25px;
+    min-height:330px;
+  }
+
+  .server-card h3 {font-size:36px}
+
+  .server-achievement strong {font-size:37px}
+
+  .server-bottom {gap:10px}
+
+  .server-status {font-size:9px}
+
+  .server-achievement span {font-size:9px}
+
+  .timeline-item {padding-left:30px}
+
+  .timeline-item h3 {font-size:21px}
+
+  .contact h2 {font-size:clamp(48px,12vw,65px)}
+
+  .footer-inner {
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .footer-socials {gap:18px}
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+
+  .reveal {
+    opacity:1;
+    transform:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-glow">
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+</div>
+
+<!-- NAVIGATION -->
+
+<nav class="nav">
+  <div class="nav-inner">
+
+    <a href="#home" class="logo">Tr1sth4n<span>.</span></a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#work">Creative Work</a>
+      <a href="#servers">Server Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact" class="nav-contact">Let's Talk ↗</a>
+    </div>
+
+  </div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+  <div class="container hero-content">
+
+    <div class="availability reveal">
+      <span class="status-dot"></span>
+      OPEN FOR PROJECTS & COLLABORATIONS
+    </div>
+
+    <p class="hero-label reveal">Creative Portfolio / 2026</p>
+
+    <h1 class="reveal">
+      Creating<br>
+      <span class="second-line">beyond the</span>
+      <span class="serif">timeline.</span>
+    </h1>
+
+    <div class="hero-bottom reveal">
+
+      <p class="hero-description">
+        I'm <strong>Tr1sth4n</strong> — a creative editor, photographer,
+        videographer and Minecraft server developer.
+        I bring ideas to life through visuals, storytelling
+        and digital experiences.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">Explore my work ↗</a>
+        <a href="#contact" class="btn btn-outline">Get in touch ↗</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="hero-index">DESIGN · CREATE · DEVELOP</div>
+</section>
+
+<!-- ABOUT -->
+
+<section class="content-section" id="about">
+  <div class="container">
+
+    <div class="section-top reveal">
+      <div>
+        <p class="section-label">01 / ABOUT ME</p>
+        <h2 class="section-title">A little about <span class="serif accent">myself.</span></h2>
+      </div>
+      <span class="section-number">01 — 06</span>
+    </div>
+
+    <div class="about-grid">
+
+      <div class="reveal">
+        <p class="about-text">
+          I enjoy building things that people can
+          <span>experience, watch and remember.</span>
+          From editing cinematic visuals to developing
+          Minecraft server experiences, creativity is
+          at the center of everything I do.
+        </p>
+
+        <p class="about-sub">
+          With around five years of video editing experience,
+          I specialize in anime edits and film editing.
+          Beyond the timeline, I also work with videography,
+          photography and Minecraft server development.
+          I'm always exploring new ways to turn ideas into reality.
+        </p>
+      </div>
+
+      <div class="about-stats reveal">
+
+        <div class="stat">
+          <span>Video editing experience</span>
+          <strong>05+ <span class="accent">yrs</span></strong>
+        </div>
+
+        <div class="stat">
+          <span>Created Minecraft servers</span>
+          <strong>02</strong>
+        </div>
+
+        <div class="stat">
+          <span>TEYVAT player milestone</span>
+          <strong class="lime">48</strong>
+        </div>
+
+        <div class="stat">
+          <span>Creative disciplines</span>
+          <strong>05</strong>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+
+<section class="content-section expertise" id="expertise">
+  <div class="container">
+
+    <div class="section-top reveal">
+      <div>
+        <p class="section-label">02 / WHAT I DO</p>
+        <h2 class="section-title">My <span class="serif accent">expertise.</span></h2>
+      </div>
+      <span class="section-number">02 — 06</span>
+    </div>
+
+    <div class="expertise-grid">
+
+      <article class="expertise-card reveal">
+        <span class="card-index">01 / VISUALS</span>
+        <span class="card-arrow">↗</span>
+        <div class="card-icon">✂</div>
+        <h3>Video Editing</h3>
+        <p>
+          Creating engaging edits through beat synchronization,
+          transitions, motion graphics, effects, pacing and storytelling.
+        </p>
+      </article>
+
+      <article class="expertise-card reveal">
+        <span class="card-index">02 / DEVELOPMENT</span>
+        <span class="card-arrow">↗</span>
+        <div class="card-icon">⌘</div>
+        <h3>Minecraft Server Development</h3>
+        <p>
+          Building and configuring Minecraft server experiences,
+          from initial setup to creating and managing a player community.
+        </p>
+      </article>
+
+      <article class="expertise-card reveal">
+        <span class="card-index">03 / CAMERA</span>
+        <span class="card-arrow">↗</span>
+        <div class="card-icon">◉</div>
+        <h3>Videography</h3>
+        <p>
+          Capturing video with attention to framing, composition
+          and visual storytelling.
+        </p>
+      </article>
+
+      <article class="expertise-card reveal">
+        <span class="card-index">04 / STILL IMAGES</span>
+        <span class="card-arrow">↗</span>
+        <div class="card-icon">▧</div>
+        <h3>Photography</h3>
+        <p>
+          Capturing moments through composition, lighting
+          and a creative perspective.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- CREATIVE WORK -->
+
+<section class="content-section" id="work">
+  <div class="container">
+
+    <div class="section-top reveal">
+      <div>
+        <p class="section-label">03 / CREATIVE PROJECTS</p>
+        <h2 class="section-title">Made to be <span class="serif accent">seen.</span></h2>
+      </div>
+      <span class="section-number">03 — 06</span>
+    </div>
+
+    <div class="work-grid">
+
+      <article class="work-card reveal">
+        <div class="work-visual">
+          <span class="visual-label">01 / VIDEO EDITING</span>
+          <div class="visual-text">ANIME<span class="accent">.</span></div>
+        </div>
+
+        <div class="work-info">
+          <h3>Anime Edits</h3>
+          <p>
+            My strongest editing specialty. Combining music,
+            rhythm, transitions and visual effects to create
+            engaging anime edits.
+          </p>
+
+          <div class="work-tags">
+            <span>BEAT SYNC</span>
+            <span>MOTION</span>
+            <span>VISUAL EFFECTS</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work-card reveal">
+        <div class="work-visual film">
+          <span class="visual-label">02 / VIDEO EDITING</span>
+          <div class="visual-text">CINEMA<span class="accent">.</span></div>
+        </div>
+
+        <div class="work-info">
+          <h3>Film Editing</h3>
+          <p>
+            Working with narrative pacing, storytelling
+            and color to create a more cinematic viewing experience.
+          </p>
+
+          <div class="work-tags">
+            <span>STORYTELLING</span>
+            <span>PACING</span>
+            <span>COLOR</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work-card reveal">
+        <div class="work-visual film">
+          <span class="visual-label">03 / VIDEOGRAPHY</span>
+          <div class="visual-text">MOTION<span class="accent">.</span></div>
+        </div>
+
+        <div class="work-info">
+          <h3>Videography</h3>
+          <p>
+            Capturing footage with an emphasis on clean framing,
+            composition and visual presentation.
+          </p>
+
+          <div class="work-tags">
+            <span>CAMERA</span>
+            <span>COMPOSITION</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work-card reveal">
+        <div class="work-visual">
+          <span class="visual-label">04 / PHOTOGRAPHY</span>
+          <div class="visual-text">STILLS<span class="accent">.</span></div>
+        </div>
+
+        <div class="work-info">
+          <h3>Photography</h3>
+          <p>
+            Creating still images with an eye for composition,
+            lighting and visual detail.
+          </p>
+
+          <div class="work-tags">
+            <span>PHOTOGRAPHY</span>
+            <span>COMPOSITION</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- MINECRAFT SERVER PROJECTS -->
+
+<section class="content-section server-section" id="servers">
+  <div class="container">
+
+    <div class="section-top reveal">
+      <div>
+        <p class="section-label">04 / DEVELOPMENT PROJECTS</p>
+        <h2 class="section-title">Beyond the <span class="ser accent">game.</span></h2>
+
+        <p class="server-intro">
+          I also develop Minecraft server experiences.
+          From creating server environments to configuring
+          and managing projects, I enjoy building spaces
+          where players can connect and play.
+        </p>
+      </div>
+
+      <span class="section-number">04 — 06</span>
+    </div>
+
+    <div class="server-grid">
+
+      <!-- METAMORPHOSIS -->
+
+      <article class="server-card reveal">
+        <div class="server-decoration">M</div>
+
+        <span class="server-type">MINECRAFT SERVER / PROJECT 01</span>
+
+        <h3>METAMORPHOSIS<span class="accent">.</span></h3>
+
+        <p>
+          A Minecraft server project that represents my work
+          in server creation and development.
+          One of the projects I built beyond video editing.
+        </p>
+
+        <div class="server-bottom">
+          <span class="server-status">SERVER PROJECT</span>
+          <span class="server-status">01 / 02</span>
+        </div>
+      </article>
+
+      <!-- TEYVAT -->
+
+      <article class="server-card featured reveal">
+        <div class="server-decoration">T</div>
+
+        <span class="server-type lime">MINECRAFT SERVER / PROJECT 02</span>
+
+        <h3>TEYVAT<span class="lime">.</span></h3>
+
+        <p>
+          My most successful Minecraft server project.
+          TEYVAT reached a milestone of 48 players,
+          making it my biggest server achievement so far.
+        </p>
+
+        <div class="server-bottom">
+
+          <span class="server-status">MOST SUCCESSFUL PROJECT</span>
+
+          <div class="server-achievement">
+            <strong>48</strong>
+            <span>PLAYERS REACHED</span>
+          </div>
+
+        </div>
+      </article>
+
+    </div>
+
+    <div class="server-skills reveal">
+      <h3>Server development areas</h3>
+
+      <div class="server-skill-list">
+        <span>Server Creation</span>
+        <span>Server Configuration</span>
+        <span>Server Management</span>
+        <span>Player Community</span>
+        <span>Project Development</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+
+<section class="content-section" id="experience">
+  <div class="container">
+
+    <div class="section-top reveal">
+      <div>
+        <p class="section-label">05 / MY JOURNEY</p>
+        <h2 class="section-title">The process of <span class="ser accent">creating.</span></h2>
+      </div>
+      <span class="section-number">05 — 06</span>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <p class="year">CURRENT</p>
+        <h3>Creative Editor & Developer</h3>
+        <p>
+          Continuing to develop my creative skills in video editing,
+          photography, videography and Minecraft server development.
+        </p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <p class="year">MINECRAFT DEVELOPMENT</p>
+        <h3>Built METAMORPHOSIS & TEYVAT</h3>
+        <p>
+          Created two Minecraft server projects, with TEYVAT
+          reaching 48 players.
+        </p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <p class="year">CREATIVE EXPANSION</p>
+        <h3>Videography & Photography</h3>
+        <p>
+          Expanded beyond editing and started working with
+          capturing footage and still images.
+        </p>
+      </div>
+
+      <div class="timeline-item reveal">
+        <p class="year">5 YEARS OF EXPERIENCE</p>
+        <h3>Video Editing</h3>
+        <p>
+          Developed my editing style through anime edits,
+          music-driven visuals and film editing.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+  <div class="container contact-content">
+
+    <p class="section-label reveal">06 / HAVE A PROJECT?</p>
+
+    <h2 class="reveal">
+      Let's create<br>
+      something <span class="serif">great.</span>
+    </h2>
+
+    <p class="contact-description reveal">
+      Have a project, collaboration or idea in mind?
+      Let's make it happen.
+    </p>
+
+    <a href="https://www.facebook.com/TR1STH4N"
+       target="_blank"
+       rel="noopener"
+       class="btn reveal">
+      Get in touch ↗
+    </a>
+
+  </div>
+
+  <div class="contact-bg">T.</div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="container footer-inner">
+
+    <a href="#home" class="footer-logo reveal">Tr1sth4n<span>.</span></a>
+
+    <p class="footer-copy reveal">
+      © 2026 TR1STH4N. ALL RIGHTS RESERVED.
+    </p>
+
+    <div class="footer-socials reveal">
+      <a href="https://www.youtube.com/@tr1sth4n29" target="_blank" rel="noopener">YOUTUBE ↗</a>
+
+      <a href="https://www.tiktok.com/@.tr1sth4n" target="_blank" rel="noopener">TIKTOK ↗</a>
+
+      <a href="https://www.facebook.com/TR1STH4N" target="_blank" rel="noopener">FACEBOOK ↗</a>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+
+/* MOBILE NAVIGATION */
+
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+
+  menuToggle.textContent = isOpen ? "✕" : "☰";
+  menuToggle.setAttribute("aria-expanded", isOpen);
+  menuToggle.setAttribute(
+    "aria-label",
+    isOpen ? "Close navigation" : "Open navigation"
+  );
+});
+
+/* CLOSE MOBILE MENU AFTER CLICK */
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.textContent = "☰";
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation");
+  });
+});
+
+/* REPEATABLE SCROLL REVEAL ANIMATION */
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    } else {
+      entry.target.classList.remove("visible");
+    }
+  });
+}, {
+  threshold: 0.12,
+  rootMargin: "0px 0px -45px 0px"
+});
+
+document.querySelectorAll(".reveal").forEach(element => {
+  revealObserver.observe(element);
+});
+
+/* CLOSE MENU WHEN RESIZING TO DESKTOP */
+
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 750) {
+    navLinks.classList.remove("open");
+    menuToggle.textContent = "☰";
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
+});
+
+</script>
+
+</body>
+</html>
