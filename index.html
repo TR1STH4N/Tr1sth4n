@@ -797,15 +797,29 @@ section.content-section {
 
 .contact-bg {
   position:absolute;
-  right:-30px;
-  bottom:-100px;
+  right:-10px;
+  bottom:-35px;
   font-family:var(--display);
-  font-size:clamp(150px,30vw,380px);
+  font-size:clamp(190px,34vw,460px);
   font-weight:800;
   letter-spacing:-.1em;
   color:white;
   opacity:.07;
   pointer-events:none;
+  white-space:nowrap;
+}
+
+/* Keep the decorative name faded while using the same scroll reveal animation. */
+.contact-bg.reveal {
+  opacity:0;
+  transform:translate3d(0, 38px, 0) scale(.985);
+  filter:blur(5px);
+}
+
+.contact-bg.reveal.visible {
+  opacity:.07;
+  transform:translate3d(0, 0, 0) scale(1);
+  filter:blur(0);
 }
 
 /* FOOTER */
@@ -866,6 +880,16 @@ footer {
   opacity:1;
   transform:translate3d(0, 0, 0) scale(1);
   filter:blur(0);
+}
+
+/* Footer must remain visible even if the scroll observer does not fire. */
+footer .reveal,
+footer .reveal.visible {
+  opacity:1;
+  transform:none;
+  filter:none;
+  transition:none;
+  will-change:auto;
 }
 
 /* Slight stagger makes groups appear in sequence */
@@ -1556,7 +1580,7 @@ footer {
 
   </div>
 
-  <div class="contact-bg">T.</div>
+  <div class="contact-bg reveal">Tr1sth4n.</div>
 </section>
 
 </main>
@@ -1578,6 +1602,7 @@ footer {
       <a href="https://www.tiktok.com/@.tr1sth4n" target="_blank" rel="noopener">TIKTOK ↗</a>
 
       <a href="https://www.facebook.com/TR1STH4N" target="_blank" rel="noopener">FACEBOOK ↗</a>
+      <a href="https://discord.com/app" target="_blank" rel="noopener">DISCORD · tr1sth4n ↗</a>
     </div>
 
   </div>
